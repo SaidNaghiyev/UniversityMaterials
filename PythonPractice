@@ -1,0 +1,44 @@
+import numpy as np #for comples array creation and processing
+import matplotlib.pyplot as plt # for displaying image array and lines
+
+img = np.ones((600,600,3)) #size of the image
+
+def DrawLine(x1, y1, x2, y2):
+    dx = abs(x2-x1) #delta x is it horizontal or vertical line (dy>dx)->Vertical line or 
+    #(dx>dy) -> horizontal line, dx=dy -> dioganal
+    dy = abs(y2-y1) #delta y
+    
+    if(x1<x2):
+        xs = 1; #positive direction for x x=x+1
+    else:
+        xs = -1; #Negetive direction for x x=x-1
+    
+    if(y1<y2):
+        ys = 1; #positive direction for y y=y+1
+    else:
+        ys = -1; #Negetive direction for y y=y-1
+        
+    x=x1; #new variable to store the current pixel
+    y=y1; #new variable to store the current pixel
+    
+    ## horizontal line calculation
+    if(dx>dy): #-> horizontal line
+        p=2*dy-dx; # the parameter P or decision parameter for step 0
+        while(x!=x2): # while not the end of the line we should calculate
+            x=x+xs; #x=x+1 or x=x-1
+            if(p>0):
+                y=y+ys; #y=y+1 or y=y-1
+                p=p+2*dy-2*dx;
+            else: #we should take the same y value
+                #y=y;
+                p=p+2*dy;
+                
+            img[y,x] = 0; # black color for my pixels
+    #else: you should change x and y
+        
+    return;
+
+DrawLine(100, 450, 500, 500) #x1, y1, x2, y2
+DrawLine(100, 450, 500, 500) #x1, y1, x2, y2
+plt.imshow(img);
+plt.show();
